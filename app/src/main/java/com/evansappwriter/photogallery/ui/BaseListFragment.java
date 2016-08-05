@@ -20,7 +20,7 @@ import java.util.List;
 public abstract class BaseListFragment<T extends Comparable<? super T>> extends Fragment {
     private static final String TAG = "BASE.LIST.FRAGMENT";
 
-    protected int crtPage = 0;
+    protected int crtPage = 1;
 
     private RecyclerView mRecyclerView;
     private AltListAdapter<T> mAdapter;
@@ -92,7 +92,10 @@ public abstract class BaseListFragment<T extends Comparable<? super T>> extends 
     }
 
     public void getNew() {
+        crtPage = 1;
+        Utils.printLogInfo(TAG, "crtPage: ", crtPage);
 
+        makeAPICall(onPrepareGetNew());
     }
 
     public void showNew(List<T> objects) {

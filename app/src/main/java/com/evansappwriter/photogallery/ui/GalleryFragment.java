@@ -132,7 +132,7 @@ public class GalleryFragment extends BaseListFragment<Photo> {
                     getSwipeContainer().setRefreshing(false);
                     return;
                 }
-                makeAPICall(onPrepareGetNew());
+                getNew();
             }
         });
 
@@ -155,7 +155,7 @@ public class GalleryFragment extends BaseListFragment<Photo> {
 
         if (!mFirstAPI) {
             mActivity.showProgress(getString(R.string.progress_photos));
-            makeAPICall(onPrepareGetNew());
+            getNew();
         }
         mFirstAPI = true;
     }

@@ -35,7 +35,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        Utils.setStrictMode(true);
+        Utils.setStrictMode(false);
     }
 
     /********************************/
