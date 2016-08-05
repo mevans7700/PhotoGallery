@@ -121,6 +121,6 @@ public abstract class BaseListFragment<T extends Comparable<? super T>> extends 
 
         mAdapter.addAll(objects);
 
-        mAdapter.sort();
+        //mAdapter.sort();
     }
 }

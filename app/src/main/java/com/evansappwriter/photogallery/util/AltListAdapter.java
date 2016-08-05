@@ -49,6 +49,8 @@ public abstract class AltListAdapter<T extends Comparable<? super T>> extends Re
 
     public void addAll(Collection<? extends T> collection) {
         mList.addAll(collection);
+
+        notifyDataSetChanged();
     }
 
     public void addAll(T... items) {
