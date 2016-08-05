@@ -28,19 +28,27 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.TimeZone;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
+
 /**
  * Created by markevans on 8/4/16.
  */
 public class PhotoViewerDialogFragment extends DialogFragment {
+    @BindView(R.id.viewpager) ViewPager mViewPager;
+    @BindView(R.id.count) TextView mCountTV;
+    @BindView(R.id.title) TextView mTitleTV;
+    @BindView(R.id.date) TextView mDateTV;
+
     private String TAG = "PhotoViewerDialogFragment";
     private static final String SERVER_DATE_FORMAT = "yyyy-MM-dd HH:mm:ss";
     private static final String DISPLAY_DATE_PATTERN = "MM-dd-yyyy";
-
-
     private ArrayList<Photo> mPhotos;
-    private ViewPager mViewPager;
-    private TextView mCountTV, mTitleTV, mDateTV;
+
     private int mSelectedPosition = 0;
+
+    private Unbinder unbinder;
 
     public static PhotoViewerDialogFragment newInstance() {
         return new PhotoViewerDialogFragment();
@@ -55,10 +63,6 @@ public class PhotoViewerDialogFragment extends DialogFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.photo_viewer_fragment, container, false);
-        mViewPager = (ViewPager) v.findViewById(R.id.viewpager);
-        mCountTV = (TextView) v.findViewById(R.id.count);
-        mTitleTV = (TextView) v.findViewById(R.id.title);
-        mDateTV = (TextView) v.findViewById(R.id.date);
 
         mPhotos = (ArrayList<Photo>) getArguments().getSerializable(Keys.KEY_PHOTOS);
         mSelectedPosition = getArguments().getInt(Keys.KEY_SELECTED);
@@ -117,7 +121,14 @@ public class PhotoViewerDialogFragment extends DialogFragment {
         mDateTV.setText(sdf.format(serverCalendar.getTime()));
     }
 
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        unbinder.unbind();
+    }
+
     public class MyViewPagerAdapter extends PagerAdapter {
+        @BindView(R.id.fullscreen) ImageView imageViewPreview;
 
         public MyViewPagerAdapter() {
         }
@@ -127,8 +138,7 @@ public class PhotoViewerDialogFragment extends DialogFragment {
 
             LayoutInflater layoutInflater = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             View view = layoutInflater.inflate(R.layout.photo_fullscreen, container, false);
-
-            ImageView imageViewPreview = (ImageView) view.findViewById(R.id.fullscreen);
+            ButterKnife.bind(this, view);
 
             Photo photo = mPhotos.get(position);
 

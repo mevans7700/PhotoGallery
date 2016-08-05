@@ -11,15 +11,18 @@ import com.evansappwriter.photogallery.R;
 import com.evansappwriter.photogallery.model.Photo;
 import com.evansappwriter.photogallery.util.Holder;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 /**
  * Created by markevans on 8/4/16.
  */
 public class PhotoHolder extends Holder<Photo> {
-    ImageView mImageView;
+    @BindView(R.id.thumbnail) ImageView mImageView;
 
     public PhotoHolder(View v){
         super(v);
-        mImageView = (ImageView) v.findViewById(R.id.thumbnail);
+        ButterKnife.bind(this, v);
     }
 
     @Override
