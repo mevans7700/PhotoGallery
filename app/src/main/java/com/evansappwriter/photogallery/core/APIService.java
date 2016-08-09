@@ -34,7 +34,7 @@ public class APIService {
     private static final int TIMEOUT_READ = 60000; // ms
     private static final int TIMEOUT_CONNECT = 15000; // ms
 
-    private static final String API_KEY = "949e98778755d1982f537d56236bbb42";
+    private static final String API_KEY = "f07f7bc1501b4354836b5b6bb773c660";
 
     @SuppressWarnings("ConstantConditions")
     private static final String REST_API = "https://api.flickr.com";
