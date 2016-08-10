@@ -63,6 +63,7 @@ public class PhotoViewerDialogFragment extends DialogFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.photo_viewer_fragment, container, false);
+        unbinder = ButterKnife.bind(this, v);
 
         mPhotos = (ArrayList<Photo>) getArguments().getSerializable(Keys.KEY_PHOTOS);
         mSelectedPosition = getArguments().getInt(Keys.KEY_SELECTED);
