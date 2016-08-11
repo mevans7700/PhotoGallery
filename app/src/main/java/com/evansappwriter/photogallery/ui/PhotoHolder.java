@@ -6,7 +6,6 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.evansappwriter.photogallery.PhotoGalleryApplication;
 import com.evansappwriter.photogallery.R;
 import com.evansappwriter.photogallery.model.Photo;
 import com.evansappwriter.photogallery.util.Holder;
@@ -38,9 +37,9 @@ public class PhotoHolder extends Holder<Photo> {
             url = photo.getUrlOriginal();
         }
 
-        Glide.with(PhotoGalleryApplication.getContext())
+        Glide.with(mImageView.getContext())
                 .load(url)
-                .thumbnail(0.5f)
+                //.thumbnail(0.5f)
                 .crossFade()
                 .placeholder(R.drawable.default_photo)
                 .error(R.drawable.default_photo)

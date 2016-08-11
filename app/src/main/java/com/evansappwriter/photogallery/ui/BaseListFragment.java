@@ -1,6 +1,7 @@
 package com.evansappwriter.photogallery.ui;
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
@@ -44,10 +45,14 @@ public abstract class BaseListFragment<T extends Comparable<? super T>> extends 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         Utils.printLogInfo(TAG, "onCreateView(): ", toString());
-        View v = inflater.inflate(R.layout.basic_list, container, false);
-        mRecyclerView = (RecyclerView)v.findViewById(R.id.recyclerview);
-        mSwipeContainer = (SwipeRefreshLayout) v.findViewById(R.id.swipeContainer);
-        return v;
+        return inflater.inflate(R.layout.basic_list, container, false);
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        mRecyclerView = (RecyclerView)view.findViewById(R.id.recyclerview);
+        mSwipeContainer = (SwipeRefreshLayout) view.findViewById(R.id.swipeContainer);
     }
 
     @Override

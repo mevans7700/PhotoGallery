@@ -28,9 +28,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.basic);
 
-        if (sharedPrefs == null) {
-            sharedPrefs = getSharedPreferences(Keys.PREFS_NAME, Context.MODE_PRIVATE);
-        }
+        sharedPrefs = getSharedPreferences(Keys.PREFS_NAME, Context.MODE_PRIVATE);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);

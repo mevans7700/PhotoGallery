@@ -70,10 +70,10 @@ public class APIParser {
                 Photo photo = new Photo();
                 photo.setId(jo.getString(Keys.KEY_ID));
                 photo.setTitle(jo.getString(Keys.KEY_TITLE));
-                photo.setUrlThumb(jo.isNull(Keys.KEY_URL_T) ? "" : jo.getString(Keys.KEY_URL_T));
-                photo.setUrlMedium(jo.isNull(Keys.KEY_URL_C) ? "" : jo.getString(Keys.KEY_URL_C));
-                photo.setUrlLarge(jo.isNull(Keys.KEY_URL_L) ? "" : jo.getString(Keys.KEY_URL_L));
-                photo.setUrlOriginal(jo.isNull(Keys.KEY_URL_O) ? "" : jo.getString(Keys.KEY_URL_O));
+                photo.setUrlThumb(jo.optString(Keys.KEY_URL_T,""));
+                photo.setUrlMedium(jo.optString(Keys.KEY_URL_C,""));
+                photo.setUrlLarge(jo.optString(Keys.KEY_URL_L,""));
+                photo.setUrlOriginal(jo.optString(Keys.KEY_URL_O,""));
                 photo.setDateTaken(jo.getString(Keys.KEY_DATETAKEN));
                 photos.add(photo);
             }

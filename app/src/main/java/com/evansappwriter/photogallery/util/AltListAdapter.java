@@ -29,7 +29,7 @@ public abstract class AltListAdapter<T extends Comparable<? super T>> extends Re
     }
 
     public List<T> getList() {
-        return mList;
+        return new ArrayList<>(mList);
     }
 
     public void add(T object) {
@@ -39,10 +39,8 @@ public abstract class AltListAdapter<T extends Comparable<? super T>> extends Re
     public List<T> swapItems(List<T> objects) {
         List<T> oldObjects = mList;
 
-        mList = objects;
-
-        // notify the observers about the new objects
-        notifyDataSetChanged();
+        mList.clear();;
+        addAll(objects);
 
         return oldObjects;
     }

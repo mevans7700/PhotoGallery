@@ -2,6 +2,7 @@ package com.evansappwriter.photogallery.ui;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -46,8 +47,6 @@ public class PhotoViewerDialogFragment extends DialogFragment {
     private static final String DISPLAY_DATE_PATTERN = "MM-dd-yyyy";
     private ArrayList<Photo> mPhotos;
 
-    private int mSelectedPosition = 0;
-
     private Unbinder unbinder;
 
     public static PhotoViewerDialogFragment newInstance() {
@@ -65,8 +64,14 @@ public class PhotoViewerDialogFragment extends DialogFragment {
         View v = inflater.inflate(R.layout.photo_viewer_fragment, container, false);
         unbinder = ButterKnife.bind(this, v);
 
+        return v;
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
         mPhotos = (ArrayList<Photo>) getArguments().getSerializable(Keys.KEY_PHOTOS);
-        mSelectedPosition = getArguments().getInt(Keys.KEY_SELECTED);
+        int selectedPosition = getArguments().getInt(Keys.KEY_SELECTED);
 
         MyViewPagerAdapter myViewPagerAdapter = new MyViewPagerAdapter();
         mViewPager.setAdapter(myViewPagerAdapter);
@@ -88,14 +93,8 @@ public class PhotoViewerDialogFragment extends DialogFragment {
             }
         });
 
-        setCurrentItem(mSelectedPosition);
-
-        return v;
-    }
-
-    private void setCurrentItem(int position) {
-        mViewPager.setCurrentItem(position, false);
-        displayMetaInfo(mSelectedPosition);
+        mViewPager.setCurrentItem(selectedPosition, false);
+        displayMetaInfo(selectedPosition);
     }
 
     private void displayMetaInfo(int position) {
@@ -154,8 +153,7 @@ public class PhotoViewerDialogFragment extends DialogFragment {
                 url = photo.getUrlThumb();
             }
 
-            Glide.with(getActivity()).load(url)
-                    .thumbnail(0.5f)
+            Glide.with(imageViewPreview.getContext()).load(url)
                     .placeholder(R.drawable.default_photo)
                     .error(R.drawable.default_photo)
                     .crossFade()

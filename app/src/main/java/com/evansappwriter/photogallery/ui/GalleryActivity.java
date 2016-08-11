@@ -13,7 +13,9 @@ public class GalleryActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        initUI();
+        if (savedInstanceState == null) {
+            initUI();
+        }
     }
 
     private void initUI() {
@@ -23,13 +25,12 @@ public class GalleryActivity extends BaseActivity {
         Utils.printLogInfo("FRAG", "id: ", code);
 
         FragmentManager fm = getSupportFragmentManager();
-        if (fm.findFragmentByTag("f" + code) == null) // first time in the activity
-        {
+        if (fm.findFragmentByTag("f" + code) == null) {
             Utils.printLogInfo("FRAG", 'f', code);
             Fragment f = GalleryFragment.newInstance(b);
 
             FragmentTransaction ft = fm.beginTransaction();
-            ft.replace(R.id.fragment_holder, f, "f" + code);
+            ft.add(R.id.fragment_holder, f, "f" + code);
             ft.commit();
         }
     }

@@ -97,7 +97,7 @@ public class GalleryFragment extends BaseListFragment<Photo> {
     public void onAttach(Context context) {
         super.onAttach(context);
 
-        mActivity = context instanceof Activity ? (BaseActivity) context : null;
+        mActivity = (BaseActivity) context;
     }
 
     @SuppressWarnings("deprecation")
